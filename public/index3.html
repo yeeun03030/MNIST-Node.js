@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>socket io test</title>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <script>
+            const socket = io();
+            function upload(files) {
+                socket.emit("upload", {
+                        'Name': files[0].name,
+                        'Data' : files[0]
+                    }, (status) => {
+                        console.log(status);
+                    }
+                );
+            }
+            socket.on("isfinish", (data)=>{
+                console.log(data);
+            });
+        </script>
+        <label for="FileBox">Choose A File: </label>
+        <input type="file" id="FileBox"><br>
+        <button type='button' id='UploadButton' class='Button'
+                onclick="upload(document.getElementById('FileBox').files)">Upload</button>
+    </body>
+</html>
